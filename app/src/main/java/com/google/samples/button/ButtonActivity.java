@@ -8,7 +8,6 @@ import android.system.ErrnoException;
 import android.util.Log;
 
 import com.google.brillo.driver.button.Button;
-import com.google.samples.simplepio.BoardDefaults;
 
 /**
  * Example of using Button driver for toggling a LED.
@@ -29,20 +28,21 @@ public class ButtonActivity extends Activity {
 
         PeripheralManagerService pioService = new PeripheralManagerService();
         try {
-            Log.i(TAG, "Configuring GPIO");
+            Log.i(TAG, "Configuring GPIO pins");
             mLedGpio = pioService.openGpio(BoardDefaults.getGPIOForLED());
             mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
             mButton = new Button(BoardDefaults.getGPIOForButton(),
                     Button.LogicState.PRESSED_WHEN_HIGH);
-            mButton.setOnButtonEventListener(pressed -> {
+            mButton.setOnButtonEventListener((gpio, pressed) -> {
                 Log.d(TAG, "onButtonEvent:" + pressed);
                 try {
                     mLedGpio.setValue(pressed);
                 } catch (ErrnoException e) {
-                    Log.e(TAG, "Error toggling GPIO pins", e);
+                    Log.e(TAG, "Error toggling GPIO pin", e);
                 }
                 return true;
-            });
+         });
+
         } catch (ErrnoException e) {
             Log.e(TAG, "Error configuring GPIO pins", e);
         }

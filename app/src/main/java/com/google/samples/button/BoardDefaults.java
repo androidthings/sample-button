@@ -1,4 +1,4 @@
-package com.google.samples.simplepio;
+package com.google.samples.button;
 
 import android.os.Build;
 
