@@ -6,11 +6,12 @@ import android.hardware.userdriver.UserDriverManager;
 import android.os.Bundle;
 import android.hardware.pio.Gpio;
 import android.hardware.pio.PeripheralManagerService;
-import android.system.ErrnoException;
 import android.util.Log;
 import android.view.KeyEvent;
 
 import com.google.brillo.driver.button.Button;
+
+import java.io.IOException;
 
 /**
  * Example of using Button driver for toggling a LED.
@@ -19,10 +20,7 @@ import com.google.brillo.driver.button.Button;
  * You need to connect an LED and a push button switch to pins specified in {@link BoardDefaults}.
  */
 public class ButtonActivity extends Activity {
-    private static final String TAG = "ButtonActivity";
-
-    // Linux input code for Escape
-    private static final int KEY_CODE = 1;
+    private static final String TAG = ButtonActivity.class.getSimpleName();
 
     private Gpio mLedGpio;
     private Button mButton;
@@ -44,16 +42,16 @@ public class ButtonActivity extends Activity {
                     Button.LogicState.PRESSED_WHEN_LOW);
 
             Log.i(TAG, "Registering framework driver");
-            mButtonDriver = mButton.createInputDriver(KEY_CODE);
+            mButtonDriver = mButton.createInputDriver(KeyEvent.KEYCODE_SPACE);
             UserDriverManager.getManager().registerInputDriver(mButtonDriver);
-        } catch (ErrnoException e) {
+        } catch (IOException e) {
             Log.e(TAG, "Error configuring GPIO pins", e);
         }
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_ESCAPE) {
+        if (keyCode == KeyEvent.KEYCODE_SPACE) {
             // Turn on the LED
             setLedValue(true);
             return true;
@@ -64,7 +62,7 @@ public class ButtonActivity extends Activity {
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_ESCAPE) {
+        if (keyCode == KeyEvent.KEYCODE_SPACE) {
             // Turn off the LED
             setLedValue(false);
             return true;
@@ -79,7 +77,7 @@ public class ButtonActivity extends Activity {
     private void setLedValue(boolean value) {
         try {
             mLedGpio.setValue(value);
-        } catch (ErrnoException e) {
+        } catch (IOException e) {
             Log.e(TAG, "Error updating GPIO value", e);
         }
     }
@@ -90,12 +88,23 @@ public class ButtonActivity extends Activity {
 
         if (mButton != null) {
             UserDriverManager.getManager().unregisterInputDriver(mButtonDriver);
-            mButton.close();
-            mButton = null;
+            try {
+                mButton.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Error closing Button GPIO", e);
+            } finally{
+                mButton = null;
+            }
         }
 
         if (mLedGpio != null) {
-            mLedGpio.close();
+            try {
+                mLedGpio.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Error closing LED GPIO", e);
+            } finally{
+                mLedGpio = null;
+            }
             mLedGpio = null;
         }
     }
