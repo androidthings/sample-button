@@ -1,20 +1,46 @@
-Brillo empty sample template
-=====================================
+Button and LED sample for Android Things
+========================================
 
-Use this empty project as a template for your Brillo 2 project.
+This Android Things sample demonstrates how to use use a button input
+UserDriver to listen to GPIO pin changes, generate and listen for key events
+and change the state of an LED accordingly.
 
 
 Pre-requisites
 --------------
 
-- Intel Edison
-- Brillo 2.0
-- ...
+- Android Things compatible board
+- Android Things SDK, currently offered through a private Maven repo. See
+  instructions at [go/brillo-gradle-setup]
+- Android Studio 2.2+
+- Java 8
+- 1 LED
+- 1 push button
+- 2 resistors
+- jumper wires
+- 1 breadboard
 
 Schematics
 ----------
 
-![Sample schematics](sample_schematics.png)
+![Schematics for Intel Edison](edison_schematics.png)
+![Schematics for Raspberry Pi 3](rpi3_schematics.png)
+
+
+Build and install
+=================
+
+On Android Studio, click on the "Run" button.
+
+If you prefer to run on the command line, type
+
+```bash
+./gradlew installDebug
+adb shell am start com.google.samples.button/.ButtonActivity
+```
+
+If you have everything set up correctly, the LED will light up when you press
+the button and light off when you release it.
 
 License
 -------
