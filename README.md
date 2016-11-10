@@ -1,7 +1,7 @@
 Button and LED sample for Android Things
 ========================================
 
-This Android Things sample demonstrates how to use use a button input
+This Android Things sample demonstrates how to use a button input
 UserDriver to listen to GPIO pin changes, generate and listen for key events
 and change the state of an LED accordingly.
 
