@@ -1,8 +1,6 @@
 package com.google.samples.button;
 
 import android.app.Activity;
-import android.hardware.userdriver.InputDriver;
-import android.hardware.userdriver.UserDriverManager;
 import android.os.Bundle;
 import android.hardware.pio.Gpio;
 import android.hardware.pio.PeripheralManagerService;
@@ -10,21 +8,24 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import com.google.brillo.driver.button.Button;
+import com.google.brillo.driver.button.ButtonInputDriver;
 
 import java.io.IOException;
 
 /**
  * Example of using Button driver for toggling a LED.
  *
- * This activity will flip the state of the LED GPIO pin whenever the button state changes.
- * You need to connect an LED and a push button switch to pins specified in {@link BoardDefaults}.
+ * This activity initialize an InputDriver to emit key events when the button GPIO pin state change
+ * and flip the state of the LED GPIO pin.
+ *
+ * You need to connect an LED and a push button switch to pins specified in {@link BoardDefaults}
+ * according to the schematic provided in the sample README.
  */
 public class ButtonActivity extends Activity {
     private static final String TAG = ButtonActivity.class.getSimpleName();
 
     private Gpio mLedGpio;
-    private Button mButton;
-    private InputDriver mButtonDriver;
+    private ButtonInputDriver mButtonInputDriver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +38,14 @@ public class ButtonActivity extends Activity {
             mLedGpio = pioService.openGpio(BoardDefaults.getGPIOForLED());
             mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
 
-            // Initialize GPIO for a button connected to Vcc through a pull-up
-            mButton = new Button(BoardDefaults.getGPIOForButton(),
-                    Button.LogicState.PRESSED_WHEN_LOW);
-
-            Log.i(TAG, "Registering framework driver");
-            mButtonDriver = mButton.createInputDriver(KeyEvent.KEYCODE_SPACE);
-            UserDriverManager.getManager().registerInputDriver(mButtonDriver);
+            Log.i(TAG, "Registering button driver");
+            // Initialize and register the InputDriver that will emit SPACE key events
+            // on GPIO state changes.
+            mButtonInputDriver = new ButtonInputDriver(
+                    BoardDefaults.getGPIOForButton(),
+                    Button.LogicState.PRESSED_WHEN_LOW,
+                    KeyEvent.KEYCODE_SPACE);
+            mButtonInputDriver.register();
         } catch (IOException e) {
             Log.e(TAG, "Error configuring GPIO pins", e);
         }
@@ -86,14 +88,14 @@ public class ButtonActivity extends Activity {
     protected void onDestroy(){
         super.onDestroy();
 
-        if (mButton != null) {
-            UserDriverManager.getManager().unregisterInputDriver(mButtonDriver);
+        if (mButtonInputDriver != null) {
+            mButtonInputDriver.unregister();
             try {
-                mButton.close();
+                mButtonInputDriver.close();
             } catch (IOException e) {
-                Log.e(TAG, "Error closing Button GPIO", e);
+                Log.e(TAG, "Error closing Button driver", e);
             } finally{
-                mButton = null;
+                mButtonInputDriver = null;
             }
         }
 
