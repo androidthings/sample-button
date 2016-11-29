@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.google.samples.button;
+package com.example.androidthings.button;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.hardware.pio.Gpio;
-import android.hardware.pio.PeripheralManagerService;
+
+import com.google.androidthings.driver.button.Button;
+import com.google.androidthings.driver.button.ButtonInputDriver;
+import com.google.androidthings.pio.Gpio;
+import com.google.androidthings.pio.PeripheralManagerService;
 import android.util.Log;
 import android.view.KeyEvent;
-
-import com.google.brillo.driver.button.Button;
-import com.google.brillo.driver.button.ButtonInputDriver;
 
 import java.io.IOException;
 

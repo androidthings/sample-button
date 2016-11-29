@@ -18,17 +18,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
-        applicationId "com.google.samples.button"
+        applicationId "com.example.androidthings.button"
         minSdkVersion 24
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
-        jackOptions {
-            enabled true
-        }
     }
     buildTypes {
         release {
@@ -36,13 +33,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
-    compile 'com.google.brillo.driver:button:0.6'
-    compile 'com.google.brillo:iot-sdk:0.8'
+    compile 'com.google.androidthings.driver:button:0.3'
+    provided 'com.android.things:androidthings:0.1-preview'
 }

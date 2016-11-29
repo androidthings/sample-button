@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.button;
+package com.example.androidthings.button;
 
 import android.os.Build;
 

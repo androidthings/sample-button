@@ -10,10 +10,7 @@ Pre-requisites
 --------------
 
 - Android Things compatible board
-- Android Things SDK, currently offered through a private Maven repo. See
-  instructions at [go/brillo-gradle-setup]
 - Android Studio 2.2+
-- Java 8
 - 1 LED
 - 1 push button
 - 2 resistors
@@ -36,7 +33,7 @@ If you prefer to run on the command line, type
 
 ```bash
 ./gradlew installDebug
-adb shell am start com.google.samples.button/.ButtonActivity
+adb shell am start com.example.androidthings.button/.ButtonActivity
 ```
 
 If you have everything set up correctly, the LED will light up when you press
