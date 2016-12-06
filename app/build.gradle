@@ -18,7 +18,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '24.0.3'
 
     defaultConfig {
         applicationId "com.example.androidthings.button"
@@ -36,6 +36,6 @@ android {
 }
 
 dependencies {
-    compile 'com.google.androidthings.driver:button:0.4'
-    provided 'com.android.things:androidthings:0.2-RC1-preview'
+    compile 'com.google.android.things.contrib:driver-button:0.1'
+    provided 'com.google.android.things:androidthings:0.1-preview'
 }

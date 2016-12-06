@@ -19,10 +19,10 @@ package com.example.androidthings.button;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.google.androidthings.driver.button.Button;
-import com.google.androidthings.driver.button.ButtonInputDriver;
-import com.google.androidthings.pio.Gpio;
-import com.google.androidthings.pio.PeripheralManagerService;
+import com.google.android.things.contrib.driver.button.Button;
+import com.google.android.things.contrib.driver.button.ButtonInputDriver;
+import com.google.android.things.pio.Gpio;
+import com.google.android.things.pio.PeripheralManagerService;
 import android.util.Log;
 import android.view.KeyEvent;
 
