@@ -30,14 +30,13 @@ public class BoardDefaults {
      * that turns on when the GPIO pin is HIGH, and off when low.
      */
     public static String getGPIOForLED() {
-        // TODO: confirm preferred port for NXP
         switch (Build.DEVICE) {
             case DEVICE_EDISON:
                 return "IO13";
             case DEVICE_RPI3:
                 return "BCM6";
             case DEVICE_NXP:
-                return "GPIO_26";
+                return "GPIO4_IO21";
             default:
                 throw new IllegalStateException("Unknown Build.DEVICE " + Build.DEVICE);
         }
@@ -47,14 +46,13 @@ public class BoardDefaults {
      * Return the GPIO pin that the Button is connected on.
      */
     public static String getGPIOForButton() {
-        // TODO: confirm preferred port for NXP
         switch (Build.DEVICE) {
             case DEVICE_EDISON:
                 return "IO12";
             case DEVICE_RPI3:
                 return "BCM21";
             case DEVICE_NXP:
-                return "GPIO_25";
+                return "GPIO4_IO20";
             default:
                 throw new IllegalStateException("Unknown Build.DEVICE " + Build.DEVICE);
         }
