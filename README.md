@@ -11,14 +11,17 @@ Pre-requisites
 
 - Android Things compatible board
 - Android Studio 2.2+
-- 1 LED
-- 1 push button
-- 2 resistors
-- jumper wires
-- 1 breadboard
+- [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things) or the following individual components:
+    - 1 LED
+    - 1 push button
+    - 2 resistors
+    - jumper wires
+    - 1 breadboard
 
 Schematics
 ----------
+
+If you have the Raspberry Pi [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things), just plug it onto your Raspberry Pi 3.
 
 ![Schematics for Intel Edison](edison_schematics.png)
 ![Schematics for Raspberry Pi 3](rpi3_schematics.png)
