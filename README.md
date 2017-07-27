@@ -1,13 +1,10 @@
-Button and LED sample for Android Things
-========================================
+# Button and LED sample for Android Things
 
 This Android Things sample demonstrates how to use a button input
 UserDriver to listen to GPIO pin changes, generate and listen for key events
 and change the state of an LED accordingly.
 
-
-Pre-requisites
---------------
+## Pre-requisites
 
 - Android Things compatible board
 - Android Studio 2.2+
@@ -18,17 +15,14 @@ Pre-requisites
     - jumper wires
     - 1 breadboard
 
-Schematics
-----------
+## Schematics
 
 If you have the Raspberry Pi [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things), just plug it onto your Raspberry Pi 3.
 
-![Schematics for Intel Edison](edison_schematics.png)
 ![Schematics for Raspberry Pi 3](rpi3_schematics.png)
+![Schematics for Intel Edison](edison_schematics.png)
 
-
-Build and install
-=================
+## Build and install
 
 On Android Studio, click on the "Run" button.
 
@@ -42,8 +36,7 @@ adb shell am start com.example.androidthings.button/.ButtonActivity
 If you have everything set up correctly, the LED will light up when you press
 the button and light off when you release it.
 
-License
--------
+## License
 
 Copyright 2016 The Android Open Source Project, Inc.
 
