@@ -120,8 +120,6 @@ public class ButtonActivity extends Activity {
                 mLedGpio.close();
             } catch (IOException e) {
                 Log.e(TAG, "Error closing LED GPIO", e);
-            } finally{
-                mLedGpio = null;
             }
             mLedGpio = null;
         }
