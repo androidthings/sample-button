@@ -123,7 +123,6 @@ public class ButtonActivity extends Activity {
             } finally{
                 mLedGpio = null;
             }
-            mLedGpio = null;
         }
     }
 }
