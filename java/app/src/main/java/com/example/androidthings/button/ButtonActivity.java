@@ -53,8 +53,12 @@ public class ButtonActivity extends Activity {
             Log.i(TAG, "Configuring GPIO pins");
             mLedGpio = pioService.openGpio(BoardDefaults.getGPIOForLED());
             mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
+        } catch (IOException e) {
+            Log.e(TAG, "Error configuring GPIO pins", e);
+        }
 
-            Log.i(TAG, "Registering button driver");
+        try {
+            Log.i(TAG, "Registering button driver " + BoardDefaults.getGPIOForButton());
             // Initialize and register the InputDriver that will emit SPACE key events
             // on GPIO state changes.
             mButtonInputDriver = new ButtonInputDriver(
@@ -62,6 +66,7 @@ public class ButtonActivity extends Activity {
                     Button.LogicState.PRESSED_WHEN_LOW,
                     KeyEvent.KEYCODE_SPACE);
             mButtonInputDriver.register();
+
         } catch (IOException e) {
             Log.e(TAG, "Error configuring GPIO pins", e);
         }
@@ -101,12 +106,12 @@ public class ButtonActivity extends Activity {
     }
 
     @Override
-    protected void onDestroy(){
-        super.onDestroy();
-
+    protected void onStop(){
+        Log.d(TAG, "onStop called.");
         if (mButtonInputDriver != null) {
             mButtonInputDriver.unregister();
             try {
+                Log.d(TAG, "Unregistering button");
                 mButtonInputDriver.close();
             } catch (IOException e) {
                 Log.e(TAG, "Error closing Button driver", e);
@@ -117,13 +122,14 @@ public class ButtonActivity extends Activity {
 
         if (mLedGpio != null) {
             try {
+                Log.d(TAG, "Unregistering LED.");
                 mLedGpio.close();
             } catch (IOException e) {
                 Log.e(TAG, "Error closing LED GPIO", e);
             } finally{
                 mLedGpio = null;
             }
-            mLedGpio = null;
         }
+        super.onStop();
     }
 }
