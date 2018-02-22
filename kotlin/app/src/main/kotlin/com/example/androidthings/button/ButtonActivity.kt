@@ -26,8 +26,6 @@ import com.google.android.things.contrib.driver.button.ButtonInputDriver
 import com.google.android.things.pio.Gpio
 import com.google.android.things.pio.PeripheralManager
 
-import java.io.IOException
-
 /**
  * Example of using Button driver for toggling a LED.
  *
@@ -37,32 +35,30 @@ import java.io.IOException
  * You need to connect an LED and a push button switch to pins specified in [BoardDefaults]
  * according to the schematic provided in the sample README.
  */
+
 class ButtonActivity : Activity() {
 
-    private lateinit var mLedGpio: Gpio
-    private lateinit var mButtonInputDriver: ButtonInputDriver
+    private lateinit var ledGpio: Gpio
+    private lateinit var buttonInputDriver: ButtonInputDriver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "Starting ButtonActivity")
 
         val pioService = PeripheralManager.getInstance()
-        try {
-            Log.i(TAG, "Configuring GPIO pins")
-            mLedGpio = pioService.openGpio(BoardDefaults.gpioForLED)
-            mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW)
 
-            Log.i(TAG, "Registering button driver")
-            // Initialize and register the InputDriver that will emit SPACE key events
-            // on GPIO state changes.
-            mButtonInputDriver = ButtonInputDriver(
-                    BoardDefaults.gpioForButton,
-                    Button.LogicState.PRESSED_WHEN_LOW,
-                    KeyEvent.KEYCODE_SPACE)
-            mButtonInputDriver.register()
-        } catch (e: IOException) {
-            Log.e(TAG, "Error configuring GPIO pins", e)
-        }
+        Log.i(TAG, "Configuring GPIO pins")
+        ledGpio = pioService.openGpio(BoardDefaults.gpioForLED)
+        ledGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW)
+
+        Log.i(TAG, "Registering button driver")
+        // Initialize and register the InputDriver that will emit SPACE key events
+        // on GPIO state changes.
+        buttonInputDriver = ButtonInputDriver(
+                BoardDefaults.gpioForButton,
+                Button.LogicState.PRESSED_WHEN_LOW,
+                KeyEvent.KEYCODE_SPACE)
+        buttonInputDriver.register()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
@@ -78,7 +74,6 @@ class ButtonActivity : Activity() {
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_SPACE) {
             // Turn off the LED
-            Log.d(TAG, "Awwe.")
             setLedValue(false)
             return true
         }
@@ -89,30 +84,15 @@ class ButtonActivity : Activity() {
      * Update the value of the LED output.
      */
     private fun setLedValue(value: Boolean) {
-        try {
-            Log.d(TAG, "Setting LED value to $value")
-            mLedGpio.value = value
-        } catch (e: IOException) {
-            Log.e(TAG, "Error updating GPIO value", e)
-        }
+        Log.d(TAG, "Setting LED value to $value")
+        ledGpio.value = value
     }
 
     override fun onStop() {
+        buttonInputDriver.unregister()
+        buttonInputDriver.close()
 
-        mButtonInputDriver.unregister()
-        try {
-            Log.d(TAG, "Unregistering Button.")
-            mButtonInputDriver.close()
-        } catch (e: IOException) {
-            Log.e(TAG, "Error closing Button driver", e)
-        }
-
-        try {
-            Log.d(TAG, "Unregistering LED.")
-            mLedGpio.close()
-        } catch (e: IOException) {
-            Log.e(TAG, "Error closing LED GPIO", e)
-        }
+        ledGpio.close()
 
         super.onStop()
     }
