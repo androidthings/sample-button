@@ -24,7 +24,7 @@ import android.view.KeyEvent
 import com.google.android.things.contrib.driver.button.Button
 import com.google.android.things.contrib.driver.button.ButtonInputDriver
 import com.google.android.things.pio.Gpio
-import com.google.android.things.pio.PeripheralManagerService
+import com.google.android.things.pio.PeripheralManager
 
 import java.io.IOException
 
@@ -46,7 +46,7 @@ class ButtonActivity : Activity() {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "Starting ButtonActivity")
 
-        val pioService = PeripheralManagerService()
+        val pioService = PeripheralManager.getInstance()
         try {
             Log.i(TAG, "Configuring GPIO pins")
             mLedGpio = pioService.openGpio(BoardDefaults.gpioForLED)
