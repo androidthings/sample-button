@@ -6,7 +6,7 @@ and change the state of an LED accordingly.
 
 ## Screenshots
 
-![Demo](demo1.gif)
+![Demo](../demo1.gif)
 
 ## Pre-requisites
 
