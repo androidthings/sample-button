@@ -61,4 +61,4 @@ License for the specific language governing permissions and limitations under
 the License.
 
 [demo-yt]: https://www.youtube.com/watch?v=hKmPZryY_Qc&index=3&list=PLWz5rJ2EKKc-GjpNkFe9q3DhE2voJscDT
-[demo-gif]: demo1.gif
+[demo-gif]: ../demo1.gif
