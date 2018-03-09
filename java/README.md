@@ -25,7 +25,7 @@ and change the state of an LED accordingly.
 
 If you have the Raspberry Pi [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things), just plug it onto your Raspberry Pi 3.
 
-![Schematics for Raspberry Pi 3](rpi3_schematics.png)
+![Schematics for Raspberry Pi 3][schematics-png]
 
 ## Build and install
 
@@ -62,3 +62,4 @@ the License.
 
 [demo-yt]: https://www.youtube.com/watch?v=hKmPZryY_Qc&index=3&list=PLWz5rJ2EKKc-GjpNkFe9q3DhE2voJscDT
 [demo-gif]: ../demo1.gif
+[schematics-png]: ../rpi3_schematics.png
