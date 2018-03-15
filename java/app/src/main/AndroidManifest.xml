@@ -19,7 +19,8 @@
 
     <uses-permission android:name="com.google.android.things.permission.MANAGE_INPUT_DRIVERS" />
 
-    <application android:allowBackup="true" android:icon="@android:drawable/sym_def_app_icon"
+    <application android:allowBackup="true"
+        android:icon="@android:drawable/sym_def_app_icon"
         android:label="@string/app_name">
 
         <uses-library android:name="com.google.android.things"/>
@@ -30,12 +31,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- Launch activity automatically on boot -->
+            <!--
+              Uncomment the following intent filter block to enable this activity to
+              launch automatically on boot, and re-launch if the app terminates.
+            -->
+<!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.IOT_LAUNCHER"/>
+                <category android:name="android.intent.category.HOME"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
+-->
         </activity>
     </application>
 
