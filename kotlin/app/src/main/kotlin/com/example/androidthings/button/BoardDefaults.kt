@@ -25,8 +25,6 @@ object BoardDefaults {
 
     /**
      * Return the GPIO pin that the LED is connected on.
-     * For example, on Intel Edison Arduino breakout, pin "IO13" is connected to an onboard LED
-     * that turns on when the GPIO pin is HIGH, and off when low.
      */
     val gpioForLED = when (Build.DEVICE) {
         DEVICE_RPI3 -> "BCM6"
