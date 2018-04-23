@@ -1,4 +1,4 @@
-# Button and LED sample for Android Things (Java)
+# Button and LED (Java)
 
 This Android Things sample demonstrates how to use a button input
 UserDriver to listen to GPIO pin changes, generate and listen for key events
