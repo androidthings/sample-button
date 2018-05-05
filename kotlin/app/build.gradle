@@ -28,7 +28,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.google.android.things.contrib:driver-button:0.7'
+    implementation 'com.google.android.things.contrib:driver-button:1.0'
 
     compileOnly 'com.google.android.things:androidthings:1.0'
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
