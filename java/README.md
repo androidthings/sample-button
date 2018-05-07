@@ -2,7 +2,7 @@
 
 This Android Things sample demonstrates how to use a button input
 UserDriver to listen to GPIO pin changes, generate and listen for key events
-and change the state of an LED accordingly.
+and change the state of an LED accordingly. Follow the [Peripheral I/O Codelab](https://codelabs.developers.google.com/codelabs/androidthings-peripherals) for step-by-step instructions on how to build a similar sample.
 
 ## Screenshots
 
@@ -26,6 +26,18 @@ and change the state of an LED accordingly.
 If you have the Raspberry Pi [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things), just plug it onto your Raspberry Pi 3.
 
 ![Schematics for Raspberry Pi 3][schematics-png]
+
+## Run on Android Things Starter Kit
+
+If you have an Android Things Starter Kit, you can easily run this sample on your i.MX7D development board from the [Android Things Toolkit](https://play.google.com/store/apps/details?id=com.google.android.things.companion&hl=en) app.
+
+To run the sample on your i.MX7D development board:
+  1. Set up your device using Toolkit
+  2. Navigate to the Apps tab
+  3. Select Run next to the Button sample.
+  4. Press the "A" button on your Rainbow HAT to light up the LED above the button.
+
+![Running Button Sample on Toolkit][toolkit-jpg]
 
 ## Build and install
 
@@ -81,3 +93,4 @@ the License.
 [demo-yt]: https://www.youtube.com/watch?v=hKmPZryY_Qc&index=3&list=PLWz5rJ2EKKc-GjpNkFe9q3DhE2voJscDT
 [demo-gif]: ../demo1.gif
 [schematics-png]: ../rpi3_schematics.png
+[toolkit-jpg]: ../toolkit_buttonsample.jpg
