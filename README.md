@@ -21,8 +21,6 @@ and change the state of an LED accordingly.
     - jumper wires
     - 1 breadboard
 
-Note: when using Rainbow HAT the button is on the front left.  It is a white rectangle with the letter A and makes the red light above it change states.
-
 ## Schematics
 
 If you have the Raspberry Pi [Rainbow HAT for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things), just plug it onto your Raspberry Pi 3.
