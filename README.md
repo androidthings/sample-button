@@ -4,6 +4,10 @@ This Android Things sample demonstrates how to use a button input
 UserDriver to listen to GPIO pin changes, generate and listen for key events
 and change the state of an LED accordingly.
 
+> **Note:** The Android Things Console will be turned down for non-commercial
+> use on January 5, 2022. For more details, see the
+> [FAQ page](https://developer.android.com/things/faq).
+
 ## Screenshots
 
 ![Button sample demo][demo-gif]
